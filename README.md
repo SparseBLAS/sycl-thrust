@@ -53,3 +53,14 @@ int main(int argc, char** argv) {
   return 0;
 }
 ```
+
+## Default Device Behavior
+By default, sycl-thrust will use the `sycl::default_selector_v` selector to pick
+the default device for both `device_allocator` and the `device` execution policy.
+The `sycl::default_selector_v` will generally pick a GPU device if available,
+falling back to a CPU device if none is available.  This allows code to run
+successfully even if no GPU is available.  If you would like to force sycl-thrust
+to use a GPU, you can build with CMake flag `-DTHRUST_DEFAULT_GPU=ON`, or by directly
+setting the compile directive `-DTHRUST_DEFAULT_GPU` if you are not using CMake.
+This may be necessary to run on NVIDIA or AMD GPUs using the Codeplay oneAPI plugin,
+as the default selector may fail to select these GPUs.

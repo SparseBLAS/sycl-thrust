@@ -2,11 +2,13 @@
 
 #include <sycl/sycl.hpp>
 
+#include <thrust/detail/default_selector.hpp>
+
 namespace thrust {
 
 class execution_policy {
 public:
-  execution_policy() : queue_(sycl::default_selector_v) {}
+  execution_policy() : queue_(thrust::default_selector_v) {}
 
   execution_policy(const sycl::queue& queue) : queue_(queue) {}
 
@@ -36,8 +38,8 @@ private:
 
 // TODO: support allocators, setting stream with par.
 
-inline execution_policy device(sycl::default_selector_v);
+inline execution_policy device(thrust::default_selector_v);
 inline execution_policy host(sycl::cpu_selector_v);
-inline execution_policy par(sycl::default_selector_v);
+inline execution_policy par(thrust::default_selector_v);
 
 } // namespace thrust

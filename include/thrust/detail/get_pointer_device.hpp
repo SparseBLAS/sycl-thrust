@@ -3,6 +3,8 @@
 #include <sycl/sycl.hpp>
 #include <vector>
 
+#include <thrust/detail/default_selector.hpp>
+
 namespace thrust {
 
 namespace __detail {
@@ -37,7 +39,7 @@ sycl::queue get_pointer_queue(T* ptr) {
     auto&& [device, context] = get_pointer_device(ptr);
     return sycl::queue(context, device);
   } catch (...) {
-    return sycl::queue(sycl::default_selector_v);
+    return sycl::queue(sycl::cpu_selector_v);
   }
 }
 

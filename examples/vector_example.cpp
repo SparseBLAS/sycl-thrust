@@ -1,13 +1,9 @@
-#include <fmt/core.h>
-#include <fmt/ranges.h>
 #include <thrust/copy.h>
 #include <thrust/device_vector.h>
 #include <thrust/fill.h>
 
-#include <ranges>
-
-template <std::ranges::random_access_range R>
-void foo(R&&) {}
+#include <fmt/core.h>
+#include <fmt/ranges.h>
 
 int main(int argc, char** argv) {
 

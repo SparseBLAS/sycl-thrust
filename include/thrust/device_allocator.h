@@ -2,6 +2,7 @@
 
 #include <sycl/sycl.hpp>
 
+#include <thrust/detail/default_selector.hpp>
 #include <thrust/device_ptr.h>
 
 namespace thrust {
@@ -23,7 +24,7 @@ public:
       : device_(other.get_device()), context_(other.get_context()) {}
 
   device_allocator() noexcept
-      : device_allocator(sycl::queue(sycl::default_selector_v)) {}
+      : device_allocator(sycl::queue(thrust::default_selector_v)) {}
 
   device_allocator(const sycl::queue& q) noexcept
       : device_(q.get_device()), context_(q.get_context()) {}
